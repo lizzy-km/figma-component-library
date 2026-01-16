@@ -65,7 +65,7 @@ export const FigmaComponents = ({
     //         await fetch(`https://api.figma.com/v1/files/${fileId}/nodes?ids=${nodeId}`, {
     //             method: 'GET',
     //             headers: {
-    //                 'X-Figma-Token': "figd_XJlJp_mbXl6x57M-V2YOJuKj0oWsb7CxizHQf5Of"
+    //                 'X-Figma-Token': ""
     //             }
     //         }).then(response => {
     //             return response.json();
