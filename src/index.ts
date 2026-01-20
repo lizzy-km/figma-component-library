@@ -1,1 +1,3 @@
-export { default as FigmaComponent} from './components/FigmaComponent';
+
+export { default as ViewContainer} from './view/ViewContainer';
+export {default as Buttons} from './components/Buttons/Buttons';

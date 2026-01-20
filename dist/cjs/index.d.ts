@@ -1,1 +1,0 @@
-export { default as FigmaComponent } from './components/FigmaComponent';
