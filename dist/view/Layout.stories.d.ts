@@ -1,5 +1,5 @@
 import type { StoryObj } from '@storybook/react-vite';
-import { ViewContainer } from 'quix-ui';
+import ViewContainer from './FlexView';
 declare const meta: {
     title: string;
     component: typeof ViewContainer;
@@ -20,8 +20,11 @@ declare const meta: {
         height: {
             control: "number";
         };
-        display: {
+        layout: {
             options: string[];
+        };
+        gap: {
+            control: "number";
         };
         direction: {
             options: string[];
@@ -29,20 +32,11 @@ declare const meta: {
         isScrollable: {
             control: "boolean";
         };
-        alignItems: {
-            options: string[];
-        };
-        justifyContent: {
-            options: string[];
-        };
         paddingX: {
             control: "number";
         };
         paddingY: {
             control: "number";
-        };
-        children: {
-            control: "text";
         };
         rounded: {
             topLeft: {
@@ -58,14 +52,39 @@ declare const meta: {
                 control: string;
             };
         };
+        mah: {
+            control: "number";
+        };
+        maw: {
+            control: "number";
+        };
+        borderColor: {
+            control: "color";
+        };
+        borderWidth: {
+            control: "number";
+        };
+        borderType: {
+            options: string[];
+        };
+        style: {
+            control: "text";
+        };
         className: {
             control: "text";
+        };
+        tooltip: {
+            position: {
+                control: string;
+            };
         };
     };
     args: {
         onClick: import("@vitest/spy").Mock<(...args: any[]) => any>;
+        onRightClick: import("@vitest/spy").Mock<(...args: any[]) => any>;
     };
 };
 export default meta;
 type Story = StoryObj<typeof meta>;
-export declare const View: Story;
+export declare const FlexView: Story;
+export declare const ScrollableFlexView: Story;

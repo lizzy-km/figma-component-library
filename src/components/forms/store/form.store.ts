@@ -30,7 +30,7 @@ export class FormStore {
         if (this.listeners.get(name)?.add(fn)) {
 
             this.listeners.set(name, new Set([fn]))
-            return () => this.listeners.get(name)?.delete(fn);
+            return () => this.listeners.get(name)?.delete(fn) ?? false
         }
 
         return false

@@ -1,3 +1,27 @@
-:root{
-    border-style:solid ;
+:root {
+    border-style: solid;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-start {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

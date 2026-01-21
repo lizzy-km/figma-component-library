@@ -60,12 +60,12 @@ export default function FormItem({
   useEffect(() => {
 
     if (!name && shouldUpdate) {
-      return store.subscribe("*", forceUpdate);
+       store.subscribe("*", forceUpdate);
     }
     if (name) {
-      return store.subscribe(name, forceUpdate);
+       store.subscribe(name, forceUpdate);
     }
-  }, [(name as string )]);
+  }, [(name)]);
 
   // shouldUpdate render-props
   if (typeof children === "function") {

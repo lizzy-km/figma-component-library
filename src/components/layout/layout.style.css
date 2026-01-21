@@ -1,0 +1,21 @@
+.quix_side_menu {
+     border-right: 1px solid #333333;
+}
+
+.quix_menu_item {
+    border-radius: 4px;
+    opacity: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: 48px;
+
+    /* &:hover{
+        filter: grayscale(0.2);
+    } */
+}
+
+.quix_menuItem_label {
+
+}

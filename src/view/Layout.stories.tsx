@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
-import ViewContainer from './ViewContainer';
+import ViewContainer from './FlexView';
 // import { ViewContainer } from 'quix-ui';
 const meta = {
     title: 'UI/View',
@@ -20,8 +20,8 @@ const meta = {
         textColor: { control: 'color' },
         width: { control: 'number' },
         height: { control: 'number' },
-        display: {
-            options: ["block", "flex", "inline-block", "inline-flex"]
+        layout: {
+            options: ['flex-start', 'flex-center', 'flex-between', 'flex-end', '']
         },
         gap: {
             control: 'number'
@@ -31,15 +31,8 @@ const meta = {
         },
         isScrollable: { control: 'boolean' },
 
-        alignItems: {
-            options: ['stretch', 'center', 'flex-start']
-        },
-        justifyContent: {
-            options: ['flex-start', 'center', 'space-between']
-        },
         paddingX: { control: 'number' },
         paddingY: { control: 'number' },
-        children: { control: 'text' },
         rounded: {
             topLeft: { control: 'number' },
             topRight: { control: 'number' },
@@ -53,26 +46,31 @@ const meta = {
         borderType: { options: ["solid", "rige", "dashed", "dotted", "double", "groove"] },
         style: { control: 'text' },
         className: { control: 'text' },
+        tooltip: {
+            position: {
+                control: 'text'
+            }
+        }
     },
     // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#story-args
-    args: { onClick: fn() },
+    args: {
+        onClick: fn(),
+        onRightClick: fn()
+    },
 } satisfies Meta<typeof ViewContainer>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 
-export const View: Story = {
+export const FlexView: Story = {
     args: {
         isScrollable: false,
-        width: 400,
-        height: 700,
+        width: '100vw',
+        height: '100vh',
         paddingX: 10,
         paddingY: 10,
-        display: "flex",
         direction: "row",
-        alignItems: "flex-start",
-        justifyContent: "flex-start",
         backgroundColor: "#181a22",
         textColor: "#f4e0e0",
         children: 'View Layout Component',
@@ -82,26 +80,30 @@ export const View: Story = {
             bottomLeft: 8,
             bottomRight: 8,
         },
-
+        layout: '',
         className: '',
+        // tooltip: {
+        //     component: <div style={{
+        //         width:600,
+        //         height:600
+        //     }} > Tooltip </div>,
+        //     position: 'left'
+        // }
     },
 };
 
-export const ScrollableView: Story = {
+export const ScrollableFlexView: Story = {
     args: {
-        isScrollable: true,
+        isScrollable: false,
         width: 400,
-        height: 700,
+        height: 400,
         paddingX: 10,
         paddingY: 10,
-        display: "flex",
-        direction: "row",
-        alignItems: "flex-start",
-        justifyContent: "flex-start",
+        direction: "column",
         backgroundColor: "#181a22",
         textColor: "#f4e0e0",
-        children: "View Layout Component",
-
+        children: <ViewContainer layout='' paddingX={10} paddingY={8} width={100} height={100} backgroundColor='#d4d4d4' textColor='#121212' children=" View Children " />,
+        layout: "flex-center",
         rounded: {
             "topLeft": 8,
             "topRight": 8,

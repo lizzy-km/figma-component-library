@@ -25,8 +25,7 @@ export default [
       }),
 
       babel({
-        exclude: "node_modules/**",
-        prsets: ['@babel/preset-react', '@babel/preset-typescript', '@babel/preset-env']
+        exclude: "node_modules/**"
       }),
       resolve(),
       commonjs(),

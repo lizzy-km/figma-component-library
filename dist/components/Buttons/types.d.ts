@@ -1,3 +1,4 @@
+import React from "react";
 export interface ButtonsProps {
     onClick: () => void;
     width?: number;
@@ -13,5 +14,6 @@ export interface ButtonsProps {
         bottomLeft?: number;
         bottomRight?: number;
     } | number;
+    style?: React.CSSProperties;
     className?: string;
 }

@@ -43,6 +43,9 @@ declare const meta: {
                 control: string;
             };
         };
+        style: {
+            control: "text";
+        };
         className: {
             control: "text";
         };
