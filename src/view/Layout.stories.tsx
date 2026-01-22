@@ -18,8 +18,8 @@ const meta = {
     argTypes: {
         backgroundColor: { control: 'color' },
         textColor: { control: 'color' },
-        width: { control: 'number' },
-        height: { control: 'number' },
+        width: { control: 'text' },
+        height: { control: 'text' },
         layout: {
             options: ['flex-start', 'flex-center', 'flex-between', 'flex-end', '']
         },

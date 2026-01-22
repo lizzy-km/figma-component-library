@@ -2,49 +2,92 @@
 import { LayoutProps, menuItemsDynamicStyleProps, menuItemsProps, sideMenuProps } from "./types";
 import { Link, NavLink } from "react-router-dom"
 import './layout.style.css'
-import { useState } from "react";
+import {  useRef, useState } from "react";
 export function Layout(props: LayoutProps) {
-    const { backgroundColor, style, className, sideMenu
+    const { backgroundColor, layoutStyle, className, sideMenu, children,header
 
     } = props
+
+    const parentEl = useRef<HTMLDivElement | null>(null)
     return (
-        <section className={`${className}`} style={{
-            width: '100vw',
-            height: '100vh',
-            position: 'relative',
+        <section ref={parentEl} className={`${className}`} style={{
             backgroundColor,
-            ...style
+            ...layoutStyle
 
         }} >
-            {sideMenu && SideMenu(sideMenu)}
+            {/* Header Section  */}
+         { header &&  <section style={{
+            height:header.height,
+            ...header.style
+         }} >
+
+            </section>}
+
+            {/* SideMenu Section  */}
+            {sideMenu && SideMenu({sideMenu,top:(header?.height??80)})}
+
+            {/* Content Section  */}
+            <section style={{
+                position: 'absolute',
+                left: sideMenu?.width,
+                top: header?.height,
+                padding: 10,
+                maxHeight: Number(parentEl?.current?.clientHeight) - (Number(header?.height)+20),
+                height: Number(parentEl?.current?.clientHeight) - (Number(header?.height)+20),
+                overflow: 'scroll',
+                width: (parentEl?.current?.clientWidth ?? 1280) - (Number(sideMenu?.width ?? 270) + 20)
+            }} >
+                {children}
+            </section>
         </section>
     )
 }
 
 
-export function SideMenu(props: sideMenuProps) {
-    const { width, height, style, menuItems, ElementType, menuItemsDynamicStyle } = props
+export function SideMenu(props: {
+    sideMenu:sideMenuProps,top:number
+}) {
+    const { width, sideMenuStyle, menuItems, ElementType, bottomSection } = props.sideMenu
 
 
 
-
+    const bottomNode = () => {
+        if (bottomSection) {
+            return (
+                bottomSection.map((item) => {
+                    return MenuItem(item)
+                })
+            )
+        }
+    }
 
     return (
         <aside className={" quix_side_menu "} style={{
             position: 'absolute',
-            left: style?.left ?? 0,
-            bottom: style?.bottom ?? 0,
-            width,
-            height,
-            top: style?.top ?? 80,
-            // ...style
+            left: sideMenuStyle?.left ?? 0,
+            bottom: sideMenuStyle?.bottom ?? 0,
+            width: width,
+            // height,
+            top: props?.top ?? 80,
+            ...sideMenuStyle
         }} >
             {
                 menuItems && menuItems.map((item) => {
 
-                    return MenuItem(item, ElementType, menuItemsDynamicStyle)
+                    return MenuItem(item, ElementType, (item as menuItemsDynamicStyleProps))
                 })
             }
+
+            {/* Bottom Section  */}
+            <div className=" sidemenu_bottom_section " >
+
+
+                <div className=" items " >
+                    {
+                        bottomNode()
+                    }
+                </div>
+            </div>
         </aside>
     )
 }
@@ -54,8 +97,8 @@ export function MenuItem(item: menuItemsProps, ElementType?: "NavLink" | "Link" 
 
     const [isHover, setIsHover] = useState(false)
     const color = {
-        bg: isHover ? menuItemsDynamicStyle?.activeColor?.background : 'transparent',
-        text: isHover ? menuItemsDynamicStyle?.activeColor?.text : menuItemsDynamicStyle?.textColor
+        bg: isHover ? menuItemsDynamicStyle?.activeColor?.background ?? '#d4d4d4' : menuItemsDynamicStyle?.backgroundColor ?? '#d4d4d480',
+        text: isHover ? menuItemsDynamicStyle?.activeColor?.text ?? "#121212" : menuItemsDynamicStyle?.textColor ?? '#121314  '
     }
 
     function onHover() {
@@ -69,7 +112,7 @@ export function MenuItem(item: menuItemsProps, ElementType?: "NavLink" | "Link" 
     }
 
     const navigate = (route: string) => {
-        // window.location.replace(route)
+        window.location.replace(route)
     }
     const Element = ({ children }: { children?: any }) =>
         ElementType === 'NavLink' ?
@@ -115,7 +158,7 @@ export function MenuItem(item: menuItemsProps, ElementType?: "NavLink" | "Link" 
                         transition: '0.2s all',
                         backgroundColor: color.bg,
                         color: color.text,
-                        border: isHover ? '' : '1px solid #121212 '
+                        // border: isHover ? '' : '1px solid #121212 '
                     }} >
                     {/* Left Icon  */}
                     {

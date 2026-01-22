@@ -6,8 +6,8 @@ export default function FlexView(props: ViewProps) {
     return <div onContextMenu={onRightClick} onClick={onClick} className={`${className} ${layout} quix_view `} style={{
         overflowY: isScrollable ? 'scroll' : 'hidden',
         flexDirection: direction || 'row',
-        width: width ? `${width}px` : 'auto',
-        height: height ? `${height}px` : 'auto',
+        width: width ? width : 'auto',
+        height: height ? height : 'auto',
         backgroundColor: backgroundColor || 'transparent',
         paddingInline: paddingX ? `${paddingX}px` : undefined,
         paddingBlock: paddingY ? `${paddingY}px` : undefined,
@@ -45,7 +45,10 @@ export default function FlexView(props: ViewProps) {
         {/* {props.children} */}
 
         <Layout
-            style={{
+            layoutStyle={{
+                width: '100%',
+                height: '100%',
+                position: 'relative',
                 display: 'flex',
                 justifyContent: 'flex-start',
                 alignItems: 'flex-start',
@@ -54,18 +57,20 @@ export default function FlexView(props: ViewProps) {
             }}
             backgroundColor="#748873"
 
+            header={{
+                height:80,
+                style:{
+                    width:'100%'
+                }
+            }}
+
             sideMenu={{
                 menuItems: [
 
                     {
                         label: 'Home',
                         route: '/',
-                        backgroundColor: '#E5E0D880',
-                        textColor: '#121212',
-                        activeColor: {
-                            background: '#E5E0D8',
-                            text: '#121212'
-                        },
+
                         icon: {
                             position: 'right',
                             component: <div style={{
@@ -85,6 +90,28 @@ export default function FlexView(props: ViewProps) {
                     {
                         label: 'Setting',
                         route: '/setting',
+                        icon: {
+                            position: 'right',
+                            component: <div style={{
+                                width: 24,
+                                height: 24,
+                                border: '1px solid #333333',
+                                marginInline: 10,
+                                borderRadius: 4
+
+                            }}
+                            >
+
+                            </div>
+                        }
+
+                    }
+                ],
+
+                bottomSection: [
+                    {
+                        label: 'Logout',
+                        route: '#logout',
                         backgroundColor: '#E5E0D880',
                         textColor: '#121212',
                         activeColor: {
@@ -107,42 +134,44 @@ export default function FlexView(props: ViewProps) {
                         }
 
                     }
+
                 ],
 
-                width: '20%',
-                height: '100%',
-                style: {
+                width: 270,
+                height: '90%',
+                sideMenuStyle: {
                     display: 'flex',
                     justifyContent: 'flex-start',
                     alignItems: 'flex-start',
-                    borderRight: '1px solid #121212'
-
+                    borderRight: '1px solid #121212',
+                    flexDirection: 'column'
                 },
-                top: 80,
                 ElementStyle: {
                     height: 48,
-                    width: '90%',
+                    width: '100%',
                     borderRadius: 8,
                     display: 'flex',
                     justifyContent: 'start',
                     alignItems: 'center',
                     gap: 8,
-                    cursor: 'pointer'
+                    cursor: 'pointer',
 
                 },
-                ElementType: 'a',
+                ElementType: 'div',
                 menuItemsDynamicStyle: {
-                    backgroundColor: '#E5E0D880',
+                    backgroundColor: '#d4d4d480',
                     textColor: '#121212',
                     activeColor: {
-                        background: '#E5E0D8',
+                        background: '#d4d4d4',
                         text: '#121212'
                     },
                 }
 
             }}
 
-        />
+        >
+            <div>Content</div>
+        </Layout>
 
 
 

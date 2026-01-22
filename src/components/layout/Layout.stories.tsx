@@ -17,7 +17,7 @@ const meta = {
     argTypes: {
         backgroundColor: { control: 'color' },
 
-        style: { control: 'text' },
+        layoutStyle: { control: 'text' },
 
         className: { control: 'text' },
 
