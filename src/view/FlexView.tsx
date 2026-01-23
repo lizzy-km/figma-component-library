@@ -44,7 +44,7 @@ export default function FlexView(props: ViewProps) {
         }
         {/* {props.children} */}
 
-        <Layout
+        {/* <Layout
             layoutStyle={{
                 width: '100%',
                 height: '100%',
@@ -171,7 +171,7 @@ export default function FlexView(props: ViewProps) {
 
         >
             <div>Content</div>
-        </Layout>
+        </Layout> */}
 
 
 
