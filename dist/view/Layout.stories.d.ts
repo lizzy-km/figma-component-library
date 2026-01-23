@@ -15,10 +15,10 @@ declare const meta: {
             control: "color";
         };
         width: {
-            control: "number";
+            control: "text";
         };
         height: {
-            control: "number";
+            control: "text";
         };
         layout: {
             options: string[];

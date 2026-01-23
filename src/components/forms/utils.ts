@@ -19,3 +19,21 @@ export function set(obj: any, path: string, value: any) {
 
   return clone;
 }
+
+
+export const storageCache = new Map<string, string | null>()
+
+
+export function getLocalStorage(key: string) {
+  if (!storageCache.has(key)) {
+    storageCache.set(key, localStorage.getItem(key))
+  }
+
+  return storageCache.get(key)
+}
+
+
+export function setLocalStorage(key: string, value: string) {
+  localStorage.setItem(key, value)
+  storageCache.set(key, value)
+}

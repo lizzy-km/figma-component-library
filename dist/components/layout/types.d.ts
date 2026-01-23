@@ -2,9 +2,15 @@ import React, { JSX } from "react";
 export interface LayoutProps {
     backgroundColor?: string;
     className?: string;
-    style?: React.CSSProperties;
+    layoutStyle?: React.CSSProperties;
     sideMenu?: sideMenuProps;
     ElementStyle?: React.CSSProperties;
+    children?: JSX.Element;
+    header?: HeaderProps;
+}
+export interface HeaderProps {
+    height: number;
+    style: React.CSSProperties;
 }
 export interface menuItemsProps {
     label: string;
@@ -23,12 +29,12 @@ export interface menuItemsProps {
 export interface sideMenuProps {
     width: number | string;
     height: number | string;
-    style?: React.CSSProperties;
+    sideMenuStyle?: React.CSSProperties;
     menuItems: menuItemsProps[];
     ElementType?: "NavLink" | "Link" | "a" | "div";
     ElementStyle?: React.CSSProperties;
     menuItemsDynamicStyle?: menuItemsDynamicStyleProps;
-    top: number;
+    bottomSection?: menuItemsProps[];
 }
 export interface menuItemsDynamicStyleProps {
     backgroundColor: string;

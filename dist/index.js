@@ -1,6 +1,95 @@
-import { jsx, jsxs } from 'react/jsx-runtime';
+import { jsxs, jsx } from 'react/jsx-runtime';
 import * as React3 from 'react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+
+function _arrayLikeToArray(r, a) {
+  (null == a || a > r.length) && (a = r.length);
+  for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+  return n;
+}
+function _arrayWithHoles(r) {
+  if (Array.isArray(r)) return r;
+}
+function _defineProperty(e, r, t) {
+  return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+    value: t,
+    enumerable: true,
+    configurable: true,
+    writable: true
+  }) : e[r] = t, e;
+}
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = true,
+      o = false;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) ; else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+    } catch (r) {
+      o = true, n = r;
+    } finally {
+      try {
+        if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function ownKeys(e, r) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r && (o = o.filter(function (r) {
+      return Object.getOwnPropertyDescriptor(e, r).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread2(e) {
+  for (var r = 1; r < arguments.length; r++) {
+    var t = null != arguments[r] ? arguments[r] : {};
+    r % 2 ? ownKeys(Object(t), true).forEach(function (r) {
+      _defineProperty(e, r, t[r]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+      Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+    });
+  }
+  return e;
+}
+function _slicedToArray(r, e) {
+  return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest();
+}
+function _toPrimitive(t, r) {
+  if ("object" != typeof t || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r);
+    if ("object" != typeof i) return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r ? String : Number)(t);
+}
+function _toPropertyKey(t) {
+  var i = _toPrimitive(t, "string");
+  return "symbol" == typeof i ? i : i + "";
+}
+function _unsupportedIterableToArray(r, a) {
+  if (r) {
+    if ("string" == typeof r) return _arrayLikeToArray(r, a);
+    var t = {}.toString.call(r).slice(8, -1);
+    return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
+  }
+}
 
 function styleInject(css, ref) {
   if ( ref === void 0 ) ref = {};
@@ -1954,209 +2043,359 @@ function useViewTransitionState(to, { relative } = {}) {
   return matchPath(path.pathname, nextPath) != null || matchPath(path.pathname, currentPath) != null;
 }
 
-var css_248z = ".quix_side_menu{border-right:1px solid #333}.quix_menu_item{align-items:center;border-radius:4px;display:flex;height:48px;justify-content:space-between;opacity:100%;width:90%}";
+var css_248z = ".quix_side_menu{border-right:1px solid #333;height:88%;.sidemenu_bottom_section{align-items:center;display:flex;height:80%;justify-content:center;position:relative;width:100%;.items{bottom:20px;cursor:pointer;height:auto;position:absolute;width:100%}}}.quix_menu_item{align-items:center;border-radius:4px;display:flex;height:48px;justify-content:space-between;opacity:100%;width:90%}";
 styleInject(css_248z);
 
 function Layout(props) {
-    const { backgroundColor, style, className, sideMenu } = props;
-    return (jsx("section", { className: `${className}`, style: {
-            width: '100vw',
-            height: '100vh',
-            position: 'relative',
-            backgroundColor,
-            ...style
-        }, children: sideMenu && SideMenu(sideMenu) }));
+  var _header$height, _parentEl$current, _parentEl$current2, _parentEl$current$cli, _parentEl$current3, _sideMenu$width;
+  var backgroundColor = props.backgroundColor,
+    layoutStyle = props.layoutStyle,
+    className = props.className,
+    sideMenu = props.sideMenu,
+    children = props.children,
+    header = props.header;
+  var parentEl = useRef(null);
+  return jsxs("section", {
+    ref: parentEl,
+    className: "".concat(className),
+    style: _objectSpread2({
+      backgroundColor: backgroundColor
+    }, layoutStyle),
+    children: [header && jsx("section", {
+      style: _objectSpread2({
+        height: header.height
+      }, header.style)
+    }), sideMenu && SideMenu({
+      sideMenu: sideMenu,
+      top: (_header$height = header === null || header === void 0 ? void 0 : header.height) !== null && _header$height !== void 0 ? _header$height : 80
+    }), jsx("section", {
+      style: {
+        position: 'absolute',
+        left: sideMenu === null || sideMenu === void 0 ? void 0 : sideMenu.width,
+        top: header === null || header === void 0 ? void 0 : header.height,
+        padding: 10,
+        maxHeight: Number(parentEl === null || parentEl === void 0 || (_parentEl$current = parentEl.current) === null || _parentEl$current === void 0 ? void 0 : _parentEl$current.clientHeight) - (Number(header === null || header === void 0 ? void 0 : header.height) + 20),
+        height: Number(parentEl === null || parentEl === void 0 || (_parentEl$current2 = parentEl.current) === null || _parentEl$current2 === void 0 ? void 0 : _parentEl$current2.clientHeight) - (Number(header === null || header === void 0 ? void 0 : header.height) + 20),
+        overflow: 'scroll',
+        width: ((_parentEl$current$cli = parentEl === null || parentEl === void 0 || (_parentEl$current3 = parentEl.current) === null || _parentEl$current3 === void 0 ? void 0 : _parentEl$current3.clientWidth) !== null && _parentEl$current$cli !== void 0 ? _parentEl$current$cli : 1280) - (Number((_sideMenu$width = sideMenu === null || sideMenu === void 0 ? void 0 : sideMenu.width) !== null && _sideMenu$width !== void 0 ? _sideMenu$width : 270) + 20)
+      },
+      children: children
+    })]
+  });
 }
 function SideMenu(props) {
-    const { width, height, style, menuItems, ElementType, menuItemsDynamicStyle } = props;
-    return (jsx("aside", { className: " quix_side_menu ", style: {
-            position: 'absolute',
-            left: style?.left ?? 0,
-            bottom: style?.bottom ?? 0,
-            width,
-            height,
-            top: style?.top ?? 80,
-            // ...style
-        }, children: menuItems && menuItems.map((item) => {
-            return MenuItem(item, ElementType, menuItemsDynamicStyle);
-        }) }));
+  var _sideMenuStyle$left, _sideMenuStyle$bottom, _props$top;
+  var _props$sideMenu = props.sideMenu,
+    width = _props$sideMenu.width,
+    sideMenuStyle = _props$sideMenu.sideMenuStyle,
+    menuItems = _props$sideMenu.menuItems,
+    ElementType = _props$sideMenu.ElementType,
+    bottomSection = _props$sideMenu.bottomSection;
+  var bottomNode = function bottomNode() {
+    if (bottomSection) {
+      return bottomSection.map(function (item) {
+        return MenuItem(item);
+      });
+    }
+  };
+  return jsxs("aside", {
+    className: " quix_side_menu ",
+    style: _objectSpread2({
+      position: 'absolute',
+      left: (_sideMenuStyle$left = sideMenuStyle === null || sideMenuStyle === void 0 ? void 0 : sideMenuStyle.left) !== null && _sideMenuStyle$left !== void 0 ? _sideMenuStyle$left : 0,
+      bottom: (_sideMenuStyle$bottom = sideMenuStyle === null || sideMenuStyle === void 0 ? void 0 : sideMenuStyle.bottom) !== null && _sideMenuStyle$bottom !== void 0 ? _sideMenuStyle$bottom : 0,
+      width: width,
+      // height,
+      top: (_props$top = props === null || props === void 0 ? void 0 : props.top) !== null && _props$top !== void 0 ? _props$top : 80
+    }, sideMenuStyle),
+    children: [menuItems && menuItems.map(function (item) {
+      return MenuItem(item, ElementType, item);
+    }), jsx("div", {
+      className: " sidemenu_bottom_section ",
+      children: jsx("div", {
+        className: " items ",
+        children: bottomNode()
+      })
+    })]
+  });
 }
 function MenuItem(item, ElementType, menuItemsDynamicStyle) {
-    const [isHover, setIsHover] = useState(false);
-    const color = {
-        bg: isHover ? menuItemsDynamicStyle?.activeColor?.background : 'transparent',
-        text: isHover ? menuItemsDynamicStyle?.activeColor?.text : menuItemsDynamicStyle?.textColor
-    };
-    function onHover() {
-        if (!isHover)
-            setIsHover((prev) => !prev);
-    }
-    function onLeave() {
-        if (isHover)
-            setIsHover((prev) => !prev);
-    }
-    const navigate = (route) => {
-        // window.location.replace(route)
-    };
-    const Element = ({ children }) => ElementType === 'NavLink' ?
-        jsx(NavLink, { style: {
-                width: "100%"
-            }, to: item.route, children: children }, item.label) :
-        ElementType === 'Link' ?
-            jsx(Link, { style: {
-                    width: "100%"
-                }, to: item.route, children: children }, item.label) :
-            ElementType === 'a' ?
-                jsx("a", { style: {
-                        width: "100%",
-                        textDecoration: 'none'
-                    }, href: item.route, children: children }, item.label) :
-                jsx("div", { style: {
-                        width: "100%"
-                    }, onClick: () => {
-                        navigate(item.route);
-                    }, children: children }, item.label);
-    return (jsx(Element, { children: jsx("div", { style: {
-                padding: 10,
-                width: '100%'
-            }, children: jsxs("div", { onMouseEnter: onHover, onMouseLeave: onLeave, className: 'quix_menu_item  ', style: {
-                    transition: '0.2s all',
-                    backgroundColor: color.bg,
-                    color: color.text,
-                    border: isHover ? '' : '1px solid #121212 '
-                }, children: [item.icon && item.icon.position === 'left' && item.icon.component, jsx("p", { className: " quix_menuItem_label ", style: {
-                            paddingInline: 10,
-                            paddingBlock: 8,
-                            color: color.text
-                        }, children: item?.label }), item.icon && item.icon.position === 'right' && item.icon.component] }) }, item.label) }));
+  var _menuItemsDynamicStyl, _menuItemsDynamicStyl2, _menuItemsDynamicStyl3, _menuItemsDynamicStyl4, _menuItemsDynamicStyl5, _menuItemsDynamicStyl6;
+  var _useState = useState(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isHover = _useState2[0],
+    setIsHover = _useState2[1];
+  var color = {
+    bg: isHover ? (_menuItemsDynamicStyl = menuItemsDynamicStyle === null || menuItemsDynamicStyle === void 0 || (_menuItemsDynamicStyl2 = menuItemsDynamicStyle.activeColor) === null || _menuItemsDynamicStyl2 === void 0 ? void 0 : _menuItemsDynamicStyl2.background) !== null && _menuItemsDynamicStyl !== void 0 ? _menuItemsDynamicStyl : '#d4d4d4' : (_menuItemsDynamicStyl3 = menuItemsDynamicStyle === null || menuItemsDynamicStyle === void 0 ? void 0 : menuItemsDynamicStyle.backgroundColor) !== null && _menuItemsDynamicStyl3 !== void 0 ? _menuItemsDynamicStyl3 : '#d4d4d480',
+    text: isHover ? (_menuItemsDynamicStyl4 = menuItemsDynamicStyle === null || menuItemsDynamicStyle === void 0 || (_menuItemsDynamicStyl5 = menuItemsDynamicStyle.activeColor) === null || _menuItemsDynamicStyl5 === void 0 ? void 0 : _menuItemsDynamicStyl5.text) !== null && _menuItemsDynamicStyl4 !== void 0 ? _menuItemsDynamicStyl4 : "#121212" : (_menuItemsDynamicStyl6 = menuItemsDynamicStyle === null || menuItemsDynamicStyle === void 0 ? void 0 : menuItemsDynamicStyle.textColor) !== null && _menuItemsDynamicStyl6 !== void 0 ? _menuItemsDynamicStyl6 : '#121314  '
+  };
+  function onHover() {
+    if (!isHover) setIsHover(function (prev) {
+      return !prev;
+    });
+  }
+  function onLeave() {
+    if (isHover) setIsHover(function (prev) {
+      return !prev;
+    });
+  }
+  var navigate = function navigate(route) {
+    window.location.replace(route);
+  };
+  var Element = function Element(_ref) {
+    var children = _ref.children;
+    return ElementType === 'NavLink' ? jsx(NavLink, {
+      style: {
+        width: "100%"
+      },
+      to: item.route,
+      children: children
+    }, item.label) : ElementType === 'Link' ? jsx(Link, {
+      style: {
+        width: "100%"
+      },
+      to: item.route,
+      children: children
+    }, item.label) : ElementType === 'a' ? jsx("a", {
+      style: {
+        width: "100%",
+        textDecoration: 'none'
+      },
+      href: item.route,
+      children: children
+    }, item.label) : jsx("div", {
+      style: {
+        width: "100%"
+      },
+      onClick: function onClick() {
+        navigate(item.route);
+      },
+      children: children
+    }, item.label);
+  };
+  return jsx(Element, {
+    children: jsx("div", {
+      style: {
+        padding: 10,
+        width: '100%'
+      },
+      children: jsxs("div", {
+        onMouseEnter: onHover,
+        onMouseLeave: onLeave,
+        className: 'quix_menu_item  ',
+        style: {
+          transition: '0.2s all',
+          backgroundColor: color.bg,
+          color: color.text
+          // border: isHover ? '' : '1px solid #121212 '
+        },
+        children: [item.icon && item.icon.position === 'left' && item.icon.component, jsx("p", {
+          className: " quix_menuItem_label ",
+          style: {
+            paddingInline: 10,
+            paddingBlock: 8,
+            color: color.text
+          },
+          children: item === null || item === void 0 ? void 0 : item.label
+        }), item.icon && item.icon.position === 'right' && item.icon.component]
+      })
+    }, item.label)
+  });
 }
 
 function FlexView(props) {
-    const { isScrollable, direction, width, height, backgroundColor, paddingX, paddingY, textColor, className, rounded, gap, style, layout, onClick, onRightClick, tooltip } = props;
-    return jsxs("div", { onContextMenu: onRightClick, onClick: onClick, className: `${className} ${layout} quix_view `, style: {
-            overflowY: isScrollable ? 'scroll' : 'hidden',
-            flexDirection: direction || 'row',
-            width: width ? `${width}px` : 'auto',
-            height: height ? `${height}px` : 'auto',
-            backgroundColor: backgroundColor || 'transparent',
-            paddingInline: paddingX ? `${paddingX}px` : undefined,
-            paddingBlock: paddingY ? `${paddingY}px` : undefined,
-            color: textColor || 'inherit',
-            borderTopLeftRadius: typeof rounded === 'number' ? rounded : rounded?.topLeft ?? 4,
-            borderTopRightRadius: typeof rounded === 'number' ? rounded : rounded?.topRight ?? 4,
-            borderBottomLeftRadius: typeof rounded === 'number' ? rounded : rounded?.bottomLeft ?? 4,
-            borderBottomRightRadius: typeof rounded === 'number' ? rounded : rounded?.bottomRight ?? 4,
-            gap,
-            transition: '0.3s all',
-            position: tooltip ? 'relative' : 'unset',
-            ...style
-        }, children: [tooltip && jsx("div", { style: {
-                    position: 'absolute',
-                    width: '100px',
-                    height: '200px',
-                    padding: 2,
-                    top: tooltip.position === 'top' ? (-(height ?? 100) + 10) : 0,
-                    bottom: tooltip.position === 'bottom' ? (-(height ?? 100) + 10) : 0,
-                    left: tooltip.position === 'left' ? (-(width ?? 100) - 10) : 0,
-                    right: tooltip.position === 'right' ? (-(width ?? 100) + 10) : 0,
-                    backgroundColor: '#d4d4',
-                    zIndex: 10
-                }, className: "quix_tooltip", children: tooltip.component }), jsx(Layout, { style: {
-                    display: 'flex',
-                    justifyContent: 'flex-start',
-                    alignItems: 'flex-start',
-                    flexDirection: 'column',
-                    borderRadius: 10,
-                }, backgroundColor: "#748873", sideMenu: {
-                    menuItems: [
-                        {
-                            label: 'Home',
-                            route: '/',
-                            backgroundColor: '#E5E0D880',
-                            textColor: '#121212',
-                            activeColor: {
-                                background: '#E5E0D8',
-                                text: '#121212'
-                            },
-                            icon: {
-                                position: 'right',
-                                component: jsx("div", { style: {
-                                        width: 24,
-                                        height: 24,
-                                        border: '1px solid #333333',
-                                        marginInline: 10,
-                                        borderRadius: 4
-                                    } })
-                            }
-                        },
-                        {
-                            label: 'Setting',
-                            route: '/setting',
-                            backgroundColor: '#E5E0D880',
-                            textColor: '#121212',
-                            activeColor: {
-                                background: '#E5E0D8',
-                                text: '#121212'
-                            },
-                            icon: {
-                                position: 'right',
-                                component: jsx("div", { style: {
-                                        width: 24,
-                                        height: 24,
-                                        border: '1px solid #333333',
-                                        marginInline: 10,
-                                        borderRadius: 4
-                                    } })
-                            }
-                        }
-                    ],
-                    width: '20%',
-                    height: '100%',
-                    style: {
-                        display: 'flex',
-                        justifyContent: 'flex-start',
-                        alignItems: 'flex-start',
-                        borderRight: '1px solid #121212'
-                    },
-                    top: 80,
-                    ElementStyle: {
-                        height: 48,
-                        width: '90%',
-                        borderRadius: 8,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        alignItems: 'center',
-                        gap: 8,
-                        cursor: 'pointer'
-                    },
-                    ElementType: 'a',
-                    menuItemsDynamicStyle: {
-                        backgroundColor: '#E5E0D880',
-                        textColor: '#121212',
-                        activeColor: {
-                            background: '#E5E0D8',
-                            text: '#121212'
-                        },
-                    }
-                } })] });
+  var _rounded$topLeft, _rounded$topRight, _rounded$bottomLeft, _rounded$bottomRight;
+  var isScrollable = props.isScrollable,
+    direction = props.direction,
+    width = props.width,
+    height = props.height,
+    backgroundColor = props.backgroundColor,
+    paddingX = props.paddingX,
+    paddingY = props.paddingY,
+    textColor = props.textColor,
+    className = props.className,
+    rounded = props.rounded,
+    gap = props.gap,
+    style = props.style,
+    layout = props.layout,
+    onClick = props.onClick,
+    onRightClick = props.onRightClick,
+    tooltip = props.tooltip;
+  return jsxs("div", {
+    onContextMenu: onRightClick,
+    onClick: onClick,
+    className: "".concat(className, " ").concat(layout, " quix_view "),
+    style: _objectSpread2({
+      overflowY: isScrollable ? 'scroll' : 'hidden',
+      flexDirection: direction || 'row',
+      width: width ? width : 'auto',
+      height: height ? height : 'auto',
+      backgroundColor: backgroundColor || 'transparent',
+      paddingInline: paddingX ? "".concat(paddingX, "px") : undefined,
+      paddingBlock: paddingY ? "".concat(paddingY, "px") : undefined,
+      color: textColor || 'inherit',
+      borderTopLeftRadius: typeof rounded === 'number' ? rounded : (_rounded$topLeft = rounded === null || rounded === void 0 ? void 0 : rounded.topLeft) !== null && _rounded$topLeft !== void 0 ? _rounded$topLeft : 4,
+      borderTopRightRadius: typeof rounded === 'number' ? rounded : (_rounded$topRight = rounded === null || rounded === void 0 ? void 0 : rounded.topRight) !== null && _rounded$topRight !== void 0 ? _rounded$topRight : 4,
+      borderBottomLeftRadius: typeof rounded === 'number' ? rounded : (_rounded$bottomLeft = rounded === null || rounded === void 0 ? void 0 : rounded.bottomLeft) !== null && _rounded$bottomLeft !== void 0 ? _rounded$bottomLeft : 4,
+      borderBottomRightRadius: typeof rounded === 'number' ? rounded : (_rounded$bottomRight = rounded === null || rounded === void 0 ? void 0 : rounded.bottomRight) !== null && _rounded$bottomRight !== void 0 ? _rounded$bottomRight : 4,
+      gap: gap,
+      transition: '0.3s all',
+      position: tooltip ? 'relative' : 'unset'
+    }, style),
+    children: [tooltip && jsx("div", {
+      style: {
+        position: 'absolute',
+        width: '100px',
+        height: '200px',
+        padding: 2,
+        top: tooltip.position === 'top' ? -(height !== null && height !== void 0 ? height : 100) + 10 : 0,
+        bottom: tooltip.position === 'bottom' ? -(height !== null && height !== void 0 ? height : 100) + 10 : 0,
+        left: tooltip.position === 'left' ? -(width !== null && width !== void 0 ? width : 100) - 10 : 0,
+        right: tooltip.position === 'right' ? -(width !== null && width !== void 0 ? width : 100) + 10 : 0,
+        backgroundColor: '#d4d4',
+        zIndex: 10
+      },
+      className: "quix_tooltip",
+      children: tooltip.component
+    }), jsx(Layout, {
+      layoutStyle: {
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+        borderRadius: 10
+      },
+      backgroundColor: "#748873",
+      header: {
+        height: 80,
+        style: {
+          width: '100%'
+        }
+      },
+      sideMenu: {
+        menuItems: [{
+          label: 'Home',
+          route: '/',
+          icon: {
+            position: 'right',
+            component: jsx("div", {
+              style: {
+                width: 24,
+                height: 24,
+                border: '1px solid #333333',
+                marginInline: 10,
+                borderRadius: 4
+              }
+            })
+          }
+        }, {
+          label: 'Setting',
+          route: '/setting',
+          icon: {
+            position: 'right',
+            component: jsx("div", {
+              style: {
+                width: 24,
+                height: 24,
+                border: '1px solid #333333',
+                marginInline: 10,
+                borderRadius: 4
+              }
+            })
+          }
+        }],
+        bottomSection: [{
+          label: 'Logout',
+          route: '#logout',
+          backgroundColor: '#E5E0D880',
+          textColor: '#121212',
+          activeColor: {
+            background: '#E5E0D8',
+            text: '#121212'
+          },
+          icon: {
+            position: 'right',
+            component: jsx("div", {
+              style: {
+                width: 24,
+                height: 24,
+                border: '1px solid #333333',
+                marginInline: 10,
+                borderRadius: 4
+              }
+            })
+          }
+        }],
+        width: 270,
+        height: '90%',
+        sideMenuStyle: {
+          display: 'flex',
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start',
+          borderRight: '1px solid #121212',
+          flexDirection: 'column'
+        },
+        ElementStyle: {
+          height: 48,
+          width: '100%',
+          borderRadius: 8,
+          display: 'flex',
+          justifyContent: 'start',
+          alignItems: 'center',
+          gap: 8,
+          cursor: 'pointer'
+        },
+        ElementType: 'div',
+        menuItemsDynamicStyle: {
+          backgroundColor: '#d4d4d480',
+          textColor: '#121212',
+          activeColor: {
+            background: '#d4d4d4',
+            text: '#121212'
+          }
+        }
+      },
+      children: jsx("div", {
+        children: "Content"
+      })
+    })]
+  });
 }
 
 function Buttons(props) {
-    const { onClick, width, height, label, paddingX, paddingY, backgroundColor, textColor, rounded, className, style } = props;
-    return jsx("button", { className: className, style: {
-            width: width ? `${width}px` : 'auto',
-            height: height ? `${height}px` : 'auto',
-            paddingInline: paddingX ?? 4,
-            paddingBlock: paddingY ?? 4,
-            backgroundColor: backgroundColor || 'transparent',
-            color: textColor || 'inherit',
-            borderTopLeftRadius: typeof rounded === 'number' ? rounded : rounded?.topLeft ?? 4,
-            borderTopRightRadius: typeof rounded === 'number' ? rounded : rounded?.topRight ?? 4,
-            borderBottomLeftRadius: typeof rounded === 'number' ? rounded : rounded?.bottomLeft ?? 4,
-            borderBottomRightRadius: typeof rounded === 'number' ? rounded : rounded?.bottomRight ?? 4,
-            cursor: 'pointer',
-            ...style
-        }, onClick: onClick, children: label });
+  var _rounded$topLeft, _rounded$topRight, _rounded$bottomLeft, _rounded$bottomRight;
+  var onClick = props.onClick,
+    width = props.width,
+    height = props.height,
+    label = props.label,
+    paddingX = props.paddingX,
+    paddingY = props.paddingY,
+    backgroundColor = props.backgroundColor,
+    textColor = props.textColor,
+    rounded = props.rounded,
+    className = props.className,
+    style = props.style;
+  return jsx("button", {
+    className: className,
+    style: _objectSpread2({
+      width: width ? "".concat(width, "px") : 'auto',
+      height: height ? "".concat(height, "px") : 'auto',
+      paddingInline: paddingX !== null && paddingX !== void 0 ? paddingX : 4,
+      paddingBlock: paddingY !== null && paddingY !== void 0 ? paddingY : 4,
+      backgroundColor: backgroundColor || 'transparent',
+      color: textColor || 'inherit',
+      borderTopLeftRadius: typeof rounded === 'number' ? rounded : (_rounded$topLeft = rounded === null || rounded === void 0 ? void 0 : rounded.topLeft) !== null && _rounded$topLeft !== void 0 ? _rounded$topLeft : 4,
+      borderTopRightRadius: typeof rounded === 'number' ? rounded : (_rounded$topRight = rounded === null || rounded === void 0 ? void 0 : rounded.topRight) !== null && _rounded$topRight !== void 0 ? _rounded$topRight : 4,
+      borderBottomLeftRadius: typeof rounded === 'number' ? rounded : (_rounded$bottomLeft = rounded === null || rounded === void 0 ? void 0 : rounded.bottomLeft) !== null && _rounded$bottomLeft !== void 0 ? _rounded$bottomLeft : 4,
+      borderBottomRightRadius: typeof rounded === 'number' ? rounded : (_rounded$bottomRight = rounded === null || rounded === void 0 ? void 0 : rounded.bottomRight) !== null && _rounded$bottomRight !== void 0 ? _rounded$bottomRight : 4,
+      cursor: 'pointer'
+    }, style),
+    onClick: onClick,
+    children: label
+  });
 }
 
 export { Buttons, FlexView };

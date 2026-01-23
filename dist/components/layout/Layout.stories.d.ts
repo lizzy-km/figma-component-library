@@ -11,7 +11,7 @@ declare const meta: {
         backgroundColor: {
             control: "color";
         };
-        style: {
+        layoutStyle: {
             control: "text";
         };
         className: {
