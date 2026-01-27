@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react-vite";
-import { Layout } from "./Layout";
+import Layout from "./Layout";
 declare const meta: {
     title: string;
     component: typeof Layout;
@@ -7,17 +7,6 @@ declare const meta: {
         layout: string;
     };
     tags: string[];
-    argTypes: {
-        backgroundColor: {
-            control: "color";
-        };
-        layoutStyle: {
-            control: "text";
-        };
-        className: {
-            control: "text";
-        };
-    };
 };
 export default meta;
 type Story = StoryObj<typeof meta>;

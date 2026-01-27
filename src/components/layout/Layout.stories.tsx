@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
-import {  Layout } from "./Layout";
+import Layout from "./Layout";
 
 const meta = {
     title: 'UI/Layout',

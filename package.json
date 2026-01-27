@@ -1,6 +1,6 @@
 {
   "name": "quix-ui",
-  "version": "1.2.2",
+  "version": "1.2.7",
   "description": "This is a react component library.",
   "type": "module",
   "main": "dist/index.js",
@@ -55,6 +55,7 @@
     "@eslint/js": "^9.39.2",
     "@figma/eslint-plugin-figma-plugins": "^1.0.0",
     "@figma/plugin-typings": "^1.122.0",
+    "@mantine/hooks": "^8.3.13",
     "@rollup/plugin-babel": "^6.1.0",
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
@@ -70,6 +71,7 @@
     "axios": "^1.13.2",
     "babel-loader": "^10.0.0",
     "eslint": "^9.39.2",
+    "fs": "^0.0.1-security",
     "globals": "^17.0.0",
     "husky": "^9.1.7",
     "jest": "^30.2.0",
@@ -90,10 +92,7 @@
     "typescript-eslint": "^8.53.0"
   },
   "peerDependencies": {
-    "react": "^18",
-    "react-dom": "^18"
-  },
-  "dependencies": {
-    "fs": "^0.0.1-security"
+    "react": "^16",
+    "react-dom": "^16"
   }
 }

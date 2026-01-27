@@ -4,13 +4,22 @@ export interface LayoutProps {
     className?: string;
     layoutStyle?: React.CSSProperties;
     sideMenu?: sideMenuProps;
-    ElementStyle?: React.CSSProperties;
+    menuItemStyle?: {
+        width: {
+            desktop: number | string;
+            tablet: number | string;
+            mobile: number | string;
+        };
+        style?: React.CSSProperties;
+    };
     children?: JSX.Element;
     header?: HeaderProps;
+    content?: () => JSX.Element;
 }
 export interface HeaderProps {
     height: number;
-    style: React.CSSProperties;
+    style?: React.CSSProperties;
+    children?: () => JSX.Element;
 }
 export interface menuItemsProps {
     label: string;
@@ -27,12 +36,23 @@ export interface menuItemsProps {
     };
 }
 export interface sideMenuProps {
-    width: number | string;
+    width: {
+        desktop: number | string;
+        tablet: number | string;
+        mobile: number | string;
+    };
     height: number | string;
     sideMenuStyle?: React.CSSProperties;
     menuItems: menuItemsProps[];
     ElementType?: "NavLink" | "Link" | "a" | "div";
-    ElementStyle?: React.CSSProperties;
+    menuItemStyle?: {
+        width?: {
+            desktop: number | string;
+            tablet: number | string;
+            mobile: number | string;
+        };
+        style: React.CSSProperties;
+    };
     menuItemsDynamicStyle?: menuItemsDynamicStyleProps;
     bottomSection?: menuItemsProps[];
 }
