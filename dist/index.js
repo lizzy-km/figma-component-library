@@ -1,7 +1,15 @@
 import { jsx as jsx$1, jsxs } from 'react/jsx-runtime';
 import * as React3 from 'react';
-import { forwardRef, useContext, useEffect, useState, useCallback } from 'react';
+import { forwardRef, useContext, useState, useCallback, useEffect } from 'react';
 
+function _arrayLikeToArray(r, a) {
+  (null == a || a > r.length) && (a = r.length);
+  for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+  return n;
+}
+function _arrayWithHoles(r) {
+  if (Array.isArray(r)) return r;
+}
 function _defineProperty(e, r, t) {
   return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
     value: t,
@@ -9,6 +17,33 @@ function _defineProperty(e, r, t) {
     configurable: true,
     writable: true
   }) : e[r] = t, e;
+}
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = true,
+      o = false;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) ; else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+    } catch (r) {
+      o = true, n = r;
+    } finally {
+      try {
+        if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 function ownKeys(e, r) {
   var t = Object.keys(e);
@@ -31,6 +66,9 @@ function _objectSpread2(e) {
   }
   return e;
 }
+function _slicedToArray(r, e) {
+  return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest();
+}
 function _taggedTemplateLiteral(e, t) {
   return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, {
     raw: {
@@ -51,6 +89,13 @@ function _toPrimitive(t, r) {
 function _toPropertyKey(t) {
   var i = _toPrimitive(t, "string");
   return "symbol" == typeof i ? i : i + "";
+}
+function _unsupportedIterableToArray(r, a) {
+  if (r) {
+    if ("string" == typeof r) return _arrayLikeToArray(r, a);
+    var t = {}.toString.call(r).slice(8, -1);
+    return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
+  }
 }
 
 function styleInject(css, ref) {
@@ -3936,22 +3981,29 @@ keyframes`
 `;
 
 function useWindowEvent(type, listener, options) {
-  useEffect(() => {
+  useEffect(function () {
     window.addEventListener(type, listener, options);
-    return () => window.removeEventListener(type, listener, options);
+    return function () {
+      return window.removeEventListener(type, listener, options);
+    };
   }, [type, listener]);
 }
-
-const eventListerOptions = {
+var eventListerOptions = {
   passive: true
 };
 function useViewportSize() {
-  const [windowSize, setWindowSize] = useState({
-    width: 0,
-    height: 0
-  });
-  const setSize = useCallback(() => {
-    setWindowSize({ width: window.innerWidth || 0, height: window.innerHeight || 0 });
+  var _useState = useState({
+      width: 0,
+      height: 0
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    windowSize = _useState2[0],
+    setWindowSize = _useState2[1];
+  var setSize = useCallback(function () {
+    setWindowSize({
+      width: window.innerWidth || 0,
+      height: window.innerHeight || 0
+    });
   }, []);
   useWindowEvent("resize", setSize, eventListerOptions);
   useWindowEvent("orientationchange", setSize, eventListerOptions);
@@ -4017,10 +4069,10 @@ function Layout(props) {
           children: bottomNode(menuItemStyle)
         })
       })]
-    });
+    }, 'aside');
   }
   function MenuItem(_ref) {
-    var _menuItemsDynamicStyl, _menuItemsDynamicStyl2, _menuItemsDynamicStyl3, _menuItemsDynamicStyl4, _menuItemsDynamicStyl5, _menuItemsDynamicStyl6, _menuItemStyle$style, _menuItemStyle$style2, _menuItemStyle$width3, _menuItemStyle$width4, _menuItemStyle$width5;
+    var _menuItemsDynamicStyl, _menuItemsDynamicStyl2, _menuItemsDynamicStyl3, _menuItemsDynamicStyl4, _menuItemsDynamicStyl5, _menuItemsDynamicStyl6, _menuItemStyle$style, _menuItemStyle$style2, _menuItemStyle$width3, _menuItemStyle$width4, _menuItemStyle$width5, _menuItemStyle$width6;
     var item = _ref.item,
       ElementType = _ref.ElementType,
       menuItemsDynamicStyle = _ref.menuItemsDynamicStyle,
@@ -4073,7 +4125,7 @@ function Layout(props) {
             transition: '0.2s all',
             justifyContent: windowWidth > 850 ? menuItemStyle === null || menuItemStyle === void 0 || (_menuItemStyle$style = menuItemStyle.style) === null || _menuItemStyle$style === void 0 ? void 0 : _menuItemStyle$style.justifyContent : 'center',
             borderRadius: windowWidth > 850 ? menuItemStyle === null || menuItemStyle === void 0 || (_menuItemStyle$style2 = menuItemStyle.style) === null || _menuItemStyle$style2 === void 0 ? void 0 : _menuItemStyle$style2.borderRadius : 2,
-            width: windowWidth <= 450 ? menuItemStyle === null || menuItemStyle === void 0 || (_menuItemStyle$width3 = menuItemStyle.width) === null || _menuItemStyle$width3 === void 0 ? void 0 : _menuItemStyle$width3.mobile : windowWidth > 450 && windowWidth < 850 ? menuItemStyle === null || menuItemStyle === void 0 || (_menuItemStyle$width4 = menuItemStyle.width) === null || _menuItemStyle$width4 === void 0 ? void 0 : _menuItemStyle$width4.tablet : windowWidth >= 850 ? menuItemStyle === null || menuItemStyle === void 0 || (_menuItemStyle$width5 = menuItemStyle.width) === null || _menuItemStyle$width5 === void 0 ? void 0 : _menuItemStyle$width5.desktop : 300
+            width: windowWidth < 450 ? menuItemStyle === null || menuItemStyle === void 0 || (_menuItemStyle$width3 = menuItemStyle.width) === null || _menuItemStyle$width3 === void 0 ? void 0 : _menuItemStyle$width3.mobile : windowWidth > 450 && windowWidth < 850 ? menuItemStyle === null || menuItemStyle === void 0 || (_menuItemStyle$width4 = menuItemStyle.width) === null || _menuItemStyle$width4 === void 0 ? void 0 : _menuItemStyle$width4.tablet : windowWidth > 850 ? menuItemStyle === null || menuItemStyle === void 0 || (_menuItemStyle$width5 = menuItemStyle.width) === null || _menuItemStyle$width5 === void 0 ? void 0 : _menuItemStyle$width5.desktop : menuItemStyle === null || menuItemStyle === void 0 || (_menuItemStyle$width6 = menuItemStyle.width) === null || _menuItemStyle$width6 === void 0 ? void 0 : _menuItemStyle$width6.desktop
           }, menuItemStyle === null || menuItemStyle === void 0 ? void 0 : menuItemStyle.style),
           children: [item.icon && item.icon.position === 'left' && item.icon.component, windowWidth > 850 && jsx$1("p", {
             className: " quix_menuItem_label ",
@@ -4085,7 +4137,7 @@ function Layout(props) {
           }), item.icon && item.icon.position === 'right' && item.icon.component]
         })
       }, item.label)
-    });
+    }, item.label);
   }
   // console.log( (size.width) - ((size.width < 450 ? Number(sideMenu?.width.mobile) : size.width < 850 ? Number(sideMenu?.width.tablet) : size.width > 850 ? Number(sideMenu?.width.desktop) : Number(sideMenu?.width.desktop)) + 30))
   return jsxs(LayoutSection, {
@@ -4118,3 +4170,26 @@ function Layout(props) {
 }
 
 export { Buttons, FlexView, Layout };
+ header.children && (header === null || header === void 0 ? void 0 : header.children())
+    }), sideMenu && SideMenu({
+      sideMenu: sideMenu,
+      top: ((_header$height = header === null || header === void 0 ? void 0 : header.height) !== null && _header$height !== void 0 ? _header$height : 80) + 20
+    }), jsxRuntime.jsx(Content, {
+      style: {
+        position: 'absolute',
+        left: size.width < 450 ? 0 : size.width < 850 ? sideMenu === null || sideMenu === void 0 ? void 0 : sideMenu.width.tablet : size.width > 850 ? sideMenu === null || sideMenu === void 0 ? void 0 : sideMenu.width.desktop : 300,
+        top: ((_header$height2 = header === null || header === void 0 ? void 0 : header.height) !== null && _header$height2 !== void 0 ? _header$height2 : 80) + 20,
+        padding: 10,
+        height: Number(size.height) - (Number(header === null || header === void 0 ? void 0 : header.height) + 70),
+        margin: 5,
+        zIndex: 10,
+        width: size.width - ((size.width < 450 ? Number(0) : size.width < 850 ? Number((_sideMenu$width$table = sideMenu === null || sideMenu === void 0 || (_sideMenu$width = sideMenu.width) === null || _sideMenu$width === void 0 ? void 0 : _sideMenu$width.tablet) !== null && _sideMenu$width$table !== void 0 ? _sideMenu$width$table : 60) : size.width > 850 ? Number((_sideMenu$width$deskt = sideMenu === null || sideMenu === void 0 || (_sideMenu$width2 = sideMenu.width) === null || _sideMenu$width2 === void 0 ? void 0 : _sideMenu$width2.desktop) !== null && _sideMenu$width$deskt !== void 0 ? _sideMenu$width$deskt : 300) : Number((_sideMenu$width$deskt2 = sideMenu === null || sideMenu === void 0 || (_sideMenu$width3 = sideMenu.width) === null || _sideMenu$width3 === void 0 ? void 0 : _sideMenu$width3.desktop) !== null && _sideMenu$width$deskt2 !== void 0 ? _sideMenu$width$deskt2 : 300)) + 30)
+      },
+      children: content && content()
+    })]
+  });
+}
+
+exports.Buttons = Buttons;
+exports.FlexView = FlexView;
+exports.Layout = Layout;

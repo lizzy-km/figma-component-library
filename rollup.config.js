@@ -28,6 +28,7 @@ export default [
         exclude: "node_modules/**",
         babelHelpers:'bundled',
         extensions: [".js", ".ts", ".tsx"],
+        
 
       }),
       resolve(),
@@ -36,11 +37,11 @@ export default [
         tsconfig: './tsconfig.json',
         compilerOptions: {
           declarationDir: 'dist'
-        }
+        },
+        
       })
     ],
-    external: ['react', 'react-dom', 'react/jsx-runtime'
-    ]
+    external: ['react', 'react-dom', 'react/jsx-runtime']
 
 
   }

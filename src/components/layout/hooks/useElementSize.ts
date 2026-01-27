@@ -1,63 +1,36 @@
-import { useLayoutEffect, useRef, useState } from "react";
-
-export default function useElementSize<T extends HTMLElement>() {
-    const ref = useRef<T | null>(null);
-    const [size, setSize] = useState({ width: 0, height: 0 });
-
-    useLayoutEffect(() => {
-        if (!ref.current) return;
-
-        const el = ref.current;
-        const update = () =>
-            setSize({ width: el.clientWidth, height: el.clientHeight });
-
-        update();
-        window.addEventListener("resize", update);
-        return () => window.removeEventListener("resize", update);
-    }, []);
-
-    return [ref, size] as const;
-}
-
-// interface SizeMapProps {
-//     width:number,
-//     height:number
-// }
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 
-export class WindowSize {
+import { useState, useCallback, useEffect } from 'react';
 
-      size = { width: 0, height: 0 };
-
-
-    constructor() {
-    if (typeof window === "undefined") return;
-
-    this.resizeWindow = this.resizeWindow.bind(this);
-
-    this.resizeWindow();
-    window.addEventListener("resize", this.resizeWindow);
-
-    this.update = this.update.bind(this)
-  }
-
-
-     resizeWindow() {
-    this.size = {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-    // this.update();
-  }
-
-  update() { 
-    return [this.size] 
-   }
-
-  destroy() {
-    window.removeEventListener("resize", this.resizeWindow);
-  } 
+function useWindowEvent(type: keyof WindowEventMap, listener: () => void, options: any) {
+  useEffect(() => {
+    window.addEventListener(type, listener, options);
+    return () => window.removeEventListener(type, listener, options);
+  }, [type, listener]);
 }
 
 
-export const useWindowSize = new WindowSize
+export { useWindowEvent };
+
+
+const eventListerOptions = {
+  passive: true
+};
+
+
+function useViewportSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: 0,
+    height: 0
+  });
+  const setSize = useCallback(() => {
+    setWindowSize({ width: window.innerWidth || 0, height: window.innerHeight || 0 });
+  }, []);
+  useWindowEvent("resize", setSize, eventListerOptions);
+  useWindowEvent("orientationchange", setSize, eventListerOptions);
+  useEffect(setSize, []);
+  return windowSize;
+}
+
+export { useViewportSize };

@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom"
 import './layout.style.css'
 import { JSX } from "react";
 import { styled } from "storybook/theming";
-import { useViewportSize } from "@mantine/hooks";
+import { useViewportSize } from "./hooks/useElementSize";
 
 export default function Layout(props: LayoutProps) {
 
@@ -14,6 +14,8 @@ export default function Layout(props: LayoutProps) {
     } = props
 
     const size = useViewportSize();
+
+   
 
     const LayoutSection = styled.section`
     width:${layoutStyle?.width}
@@ -48,7 +50,7 @@ export default function Layout(props: LayoutProps) {
         }
 
         return (
-            <aside className={" quix_side_menu "} style={{
+            <aside key={'aside'} className={" quix_side_menu "} style={{
                 position: 'absolute',
                 left: size.width < 450 ? 8 : sideMenuStyle?.left ?? 0,
                 bottom: size.width < 450 ? Number(menuItemStyle?.width?.mobile ?? 48) / 2 : sideMenuStyle?.bottom ?? 0,
@@ -152,7 +154,7 @@ export default function Layout(props: LayoutProps) {
                         </div>
 
         return (
-            <Element children={
+            <Element key={item.label} children={
                 <div key={item.label} style={{
                     padding: windowWidth > 850 ? 10 : 6,
                     width: '100%'
@@ -164,7 +166,7 @@ export default function Layout(props: LayoutProps) {
                             transition: '0.2s all',
                             justifyContent: windowWidth > 850 ? menuItemStyle?.style?.justifyContent : 'center',
                             borderRadius: windowWidth > 850 ? menuItemStyle?.style?.borderRadius : 2,
-                            width: windowWidth <= 450 ? menuItemStyle?.width?.mobile : windowWidth > 450 && windowWidth < 850 ? menuItemStyle?.width?.tablet : windowWidth >= 850 ? menuItemStyle?.width?.desktop : 300,
+                            width: windowWidth < 450 ? menuItemStyle?.width?.mobile : windowWidth > 450 && windowWidth < 850 ? menuItemStyle?.width?.tablet : windowWidth > 850 ? menuItemStyle?.width?.desktop : menuItemStyle?.width?.desktop,
                             ...menuItemStyle?.style
 
                         }} >
