@@ -66,7 +66,7 @@ type Story = StoryObj<typeof meta>;
 export const FlexView: Story = {
     args: {
         isScrollable: false,
-        width: '100vw',
+        width: "100vw",
         height: '100vh',
         paddingX: 10,
         paddingY: 10,

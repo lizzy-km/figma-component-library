@@ -1,6 +1,5 @@
 .quix_side_menu {
     border-right: 1px solid #333333;
-    height: 88%;
 
     .sidemenu_bottom_section {
 
@@ -8,6 +7,7 @@
         height: 80%;
         position: relative;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         /* background-color: #33333310; */
@@ -32,10 +32,10 @@
     align-items: center;
     width: 90%;
     height: 48px;
-
-    /* &:hover{
-        filter: grayscale(0.2);
-    } */
+    cursor: pointer;
+  
 }
+
+
 
 .quix_menuItem_label {}
