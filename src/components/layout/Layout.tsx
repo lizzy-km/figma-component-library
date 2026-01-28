@@ -4,7 +4,7 @@ import { Link, NavLink, Outlet, useNavigate } from "react-router-dom"
 import './layout.style.css'
 import { JSX } from "react";
 import { styled } from "storybook/theming";
-import { useViewPortSize } from "../..";
+import { useViewportSize } from "./hooks/useElementSize";
 
 export default function Layout(props: LayoutProps) {
 
@@ -13,7 +13,7 @@ export default function Layout(props: LayoutProps) {
 
     } = props
 
-    const size = useViewPortSize();
+    const size = useViewportSize();
 
 
 

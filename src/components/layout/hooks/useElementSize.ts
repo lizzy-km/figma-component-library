@@ -19,7 +19,7 @@ const eventListerOptions = {
 };
 
 
-function useViewportSize() {
+export function useViewportSize() {
   const [windowSize, setWindowSize] = useState({
     width: 0,
     height: 0
@@ -33,4 +33,3 @@ function useViewportSize() {
   return windowSize;
 }
 
-export default  useViewportSize 

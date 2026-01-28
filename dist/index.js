@@ -2059,6 +2059,37 @@ keyframes`
   }
 `;
 
+function useWindowEvent(type, listener, options) {
+  useEffect(function () {
+    window.addEventListener(type, listener, options);
+    return function () {
+      return window.removeEventListener(type, listener, options);
+    };
+  }, [type, listener]);
+}
+var eventListerOptions = {
+  passive: true
+};
+function useViewportSize() {
+  var _useState = useState({
+      width: 0,
+      height: 0
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    windowSize = _useState2[0],
+    setWindowSize = _useState2[1];
+  var setSize = useCallback(function () {
+    setWindowSize({
+      width: window.innerWidth || 0,
+      height: window.innerHeight || 0
+    });
+  }, []);
+  useWindowEvent("resize", setSize, eventListerOptions);
+  useWindowEvent("orientationchange", setSize, eventListerOptions);
+  useEffect(setSize, []);
+  return windowSize;
+}
+
 var _templateObject, _templateObject2, _templateObject3;
 function Layout(props) {
   var _header$height, _header$height2, _sideMenu$width$table, _sideMenu$width, _sideMenu$width$deskt, _sideMenu$width2, _sideMenu$width$deskt2, _sideMenu$width3;
@@ -2221,70 +2252,23 @@ function QuixRouterProvider(_ref) {
   });
 }
 
-function useWindowEvent(type, listener, options) {
-  useEffect(function () {
-    window.addEventListener(type, listener, options);
-    return function () {
-      return window.removeEventListener(type, listener, options);
-    };
-  }, [type, listener]);
-}
-var eventListerOptions = {
-  passive: true
-};
-function useViewportSize() {
-  var _useState = useState({
-      width: 0,
-      height: 0
-    }),
-    _useState2 = _slicedToArray(_useState, 2),
-    windowSize = _useState2[0],
-    setWindowSize = _useState2[1];
-  var setSize = useCallback(function () {
-    setWindowSize({
-      width: window.innerWidth || 0,
-      height: window.innerHeight || 0
-    });
-  }, []);
-  useWindowEvent("resize", setSize, eventListerOptions);
-  useWindowEvent("orientationchange", setSize, eventListerOptions);
-  useEffect(setSize, []);
-  return windowSize;
+export { Buttons, FlexView, Layout, QuixRouterProvider };
+e.width > 850 ? Number((_sideMenu$width$deskt = sideMenu === null || sideMenu === void 0 || (_sideMenu$width2 = sideMenu.width) === null || _sideMenu$width2 === void 0 ? void 0 : _sideMenu$width2.desktop) !== null && _sideMenu$width$deskt !== void 0 ? _sideMenu$width$deskt : 300) : Number((_sideMenu$width$deskt2 = sideMenu === null || sideMenu === void 0 || (_sideMenu$width3 = sideMenu.width) === null || _sideMenu$width3 === void 0 ? void 0 : _sideMenu$width3.desktop) !== null && _sideMenu$width$deskt2 !== void 0 ? _sideMenu$width$deskt2 : 300)) + 30)
+      },
+      children: jsxRuntime.jsx(reactRouterDom.Outlet, {})
+    })]
+  });
 }
 
-export { Buttons, FlexView, Layout, QuixRouterProvider, useViewportSize as useViewPortSize };
-t2.useEffect(function () {
-    window.addEventListener(type, listener, options);
-    return function () {
-      return window.removeEventListener(type, listener, options);
-    };
-  }, [type, listener]);
-}
-var eventListerOptions = {
-  passive: true
-};
-function useViewportSize() {
-  var _useState = React2.useState({
-      width: 0,
-      height: 0
-    }),
-    _useState2 = _slicedToArray(_useState, 2),
-    windowSize = _useState2[0],
-    setWindowSize = _useState2[1];
-  var setSize = React2.useCallback(function () {
-    setWindowSize({
-      width: window.innerWidth || 0,
-      height: window.innerHeight || 0
-    });
-  }, []);
-  useWindowEvent("resize", setSize, eventListerOptions);
-  useWindowEvent("orientationchange", setSize, eventListerOptions);
-  React2.useEffect(setSize, []);
-  return windowSize;
+function QuixRouterProvider(_ref) {
+  var routes = _ref.routes;
+  var router = reactRouterDom.createBrowserRouter(routes);
+  return jsxRuntime.jsx(reactRouterDom.RouterProvider, {
+    router: router
+  });
 }
 
 exports.Buttons = Buttons;
 exports.FlexView = FlexView;
 exports.Layout = Layout;
 exports.QuixRouterProvider = QuixRouterProvider;
-exports.useViewPortSize = useViewportSize;
