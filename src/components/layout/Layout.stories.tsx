@@ -153,7 +153,7 @@ export const Layout1: Story = {
 
 
                 },
-                ElementType: 'div',
+                ElementType: 'NavLink',
                 menuItemsDynamicStyle: {
                     backgroundColor: '#d4d4d480',
                     textColor: '#121212',

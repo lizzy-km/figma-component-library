@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/react-vite'
+import { MemoryRouter } from "react-router-dom";
 
 const preview: Preview = {
    
@@ -15,7 +16,17 @@ const preview: Preview = {
        action: /Action$/i,
       },
     },
+
+    
   },
+
+  decorators:[
+    (Story)=>(
+      <MemoryRouter initialEntries={['/']} >
+        <Story/>
+      </MemoryRouter>
+    )
+  ]
 };
 
 export default preview;

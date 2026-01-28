@@ -4170,26 +4170,3 @@ function Layout(props) {
 }
 
 export { Buttons, FlexView, Layout };
- header.children && (header === null || header === void 0 ? void 0 : header.children())
-    }), sideMenu && SideMenu({
-      sideMenu: sideMenu,
-      top: ((_header$height = header === null || header === void 0 ? void 0 : header.height) !== null && _header$height !== void 0 ? _header$height : 80) + 20
-    }), jsxRuntime.jsx(Content, {
-      style: {
-        position: 'absolute',
-        left: size.width < 450 ? 0 : size.width < 850 ? sideMenu === null || sideMenu === void 0 ? void 0 : sideMenu.width.tablet : size.width > 850 ? sideMenu === null || sideMenu === void 0 ? void 0 : sideMenu.width.desktop : 300,
-        top: ((_header$height2 = header === null || header === void 0 ? void 0 : header.height) !== null && _header$height2 !== void 0 ? _header$height2 : 80) + 20,
-        padding: 10,
-        height: Number(size.height) - (Number(header === null || header === void 0 ? void 0 : header.height) + 70),
-        margin: 5,
-        zIndex: 10,
-        width: size.width - ((size.width < 450 ? Number(0) : size.width < 850 ? Number((_sideMenu$width$table = sideMenu === null || sideMenu === void 0 || (_sideMenu$width = sideMenu.width) === null || _sideMenu$width === void 0 ? void 0 : _sideMenu$width.tablet) !== null && _sideMenu$width$table !== void 0 ? _sideMenu$width$table : 60) : size.width > 850 ? Number((_sideMenu$width$deskt = sideMenu === null || sideMenu === void 0 || (_sideMenu$width2 = sideMenu.width) === null || _sideMenu$width2 === void 0 ? void 0 : _sideMenu$width2.desktop) !== null && _sideMenu$width$deskt !== void 0 ? _sideMenu$width$deskt : 300) : Number((_sideMenu$width$deskt2 = sideMenu === null || sideMenu === void 0 || (_sideMenu$width3 = sideMenu.width) === null || _sideMenu$width3 === void 0 ? void 0 : _sideMenu$width3.desktop) !== null && _sideMenu$width$deskt2 !== void 0 ? _sideMenu$width$deskt2 : 300)) + 30)
-      },
-      children: content && content()
-    })]
-  });
-}
-
-exports.Buttons = Buttons;
-exports.FlexView = FlexView;
-exports.Layout = Layout;
