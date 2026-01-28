@@ -164,13 +164,13 @@ export const Layout1: Story = {
                 }
 
             },
-            content:()=><div style={{
-                maxWidth:'100%',
-                height:'100%',
-                maxHeight:"100%",
-                backgroundColor:'#d4d4d4',
-                padding:10
-            }} >Content</div>
+            // content:()=><div style={{
+            //     maxWidth:'100%',
+            //     height:'100%',
+            //     maxHeight:"100%",
+            //     backgroundColor:'#d4d4d4',
+            //     padding:10
+            // }} >Content</div>
 
     }
 }

@@ -1,4 +1,4 @@
-import { jsx as jsx$1, jsxs } from 'react/jsx-runtime';
+import { jsxs, jsx as jsx$1 } from 'react/jsx-runtime';
 import { useNavigate, Outlet, NavLink, Link, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import * as React2 from 'react';
 import { forwardRef, useContext, useState, useCallback, useEffect } from 'react';
@@ -147,7 +147,7 @@ function FlexView(props) {
     onClick = props.onClick,
     onRightClick = props.onRightClick,
     tooltip = props.tooltip;
-  return jsx$1("div", {
+  return jsxs("div", {
     onContextMenu: onRightClick,
     onClick: onClick,
     className: "".concat(className, " ").concat(layout, " quix_view "),
@@ -168,7 +168,7 @@ function FlexView(props) {
       transition: '0.3s all',
       position: tooltip ? 'relative' : 'unset'
     }, style),
-    children: tooltip && jsx$1("div", {
+    children: [tooltip && jsx$1("div", {
       style: {
         position: 'absolute',
         width: '100px',
@@ -183,7 +183,7 @@ function FlexView(props) {
       },
       className: "quix_tooltip",
       children: tooltip.component
-    })
+    }), props.children]
   });
 }
 
@@ -2059,37 +2059,6 @@ keyframes`
   }
 `;
 
-function useWindowEvent(type, listener, options) {
-  useEffect(function () {
-    window.addEventListener(type, listener, options);
-    return function () {
-      return window.removeEventListener(type, listener, options);
-    };
-  }, [type, listener]);
-}
-var eventListerOptions = {
-  passive: true
-};
-function useViewportSize() {
-  var _useState = useState({
-      width: 0,
-      height: 0
-    }),
-    _useState2 = _slicedToArray(_useState, 2),
-    windowSize = _useState2[0],
-    setWindowSize = _useState2[1];
-  var setSize = useCallback(function () {
-    setWindowSize({
-      width: window.innerWidth || 0,
-      height: window.innerHeight || 0
-    });
-  }, []);
-  useWindowEvent("resize", setSize, eventListerOptions);
-  useWindowEvent("orientationchange", setSize, eventListerOptions);
-  useEffect(setSize, []);
-  return windowSize;
-}
-
 var _templateObject, _templateObject2, _templateObject3;
 function Layout(props) {
   var _header$height, _header$height2, _sideMenu$width$table, _sideMenu$width, _sideMenu$width$deskt, _sideMenu$width2, _sideMenu$width$deskt2, _sideMenu$width3;
@@ -2252,23 +2221,70 @@ function QuixRouterProvider(_ref) {
   });
 }
 
-export { Buttons, FlexView, Layout, QuixRouterProvider };
-width > 850 ? Number((_sideMenu$width$deskt = sideMenu === null || sideMenu === void 0 || (_sideMenu$width2 = sideMenu.width) === null || _sideMenu$width2 === void 0 ? void 0 : _sideMenu$width2.desktop) !== null && _sideMenu$width$deskt !== void 0 ? _sideMenu$width$deskt : 300) : Number((_sideMenu$width$deskt2 = sideMenu === null || sideMenu === void 0 || (_sideMenu$width3 = sideMenu.width) === null || _sideMenu$width3 === void 0 ? void 0 : _sideMenu$width3.desktop) !== null && _sideMenu$width$deskt2 !== void 0 ? _sideMenu$width$deskt2 : 300)) + 30)
-      },
-      children: jsxRuntime.jsx(reactRouterDom.Outlet, {})
-    })]
-  });
+function useWindowEvent(type, listener, options) {
+  useEffect(function () {
+    window.addEventListener(type, listener, options);
+    return function () {
+      return window.removeEventListener(type, listener, options);
+    };
+  }, [type, listener]);
+}
+var eventListerOptions = {
+  passive: true
+};
+function useViewportSize() {
+  var _useState = useState({
+      width: 0,
+      height: 0
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    windowSize = _useState2[0],
+    setWindowSize = _useState2[1];
+  var setSize = useCallback(function () {
+    setWindowSize({
+      width: window.innerWidth || 0,
+      height: window.innerHeight || 0
+    });
+  }, []);
+  useWindowEvent("resize", setSize, eventListerOptions);
+  useWindowEvent("orientationchange", setSize, eventListerOptions);
+  useEffect(setSize, []);
+  return windowSize;
 }
 
-function QuixRouterProvider(_ref) {
-  var routes = _ref.routes;
-  var router = reactRouterDom.createBrowserRouter(routes);
-  return jsxRuntime.jsx(reactRouterDom.RouterProvider, {
-    router: router
-  });
+export { Buttons, FlexView, Layout, QuixRouterProvider, useViewportSize as useViewPortSize };
+t2.useEffect(function () {
+    window.addEventListener(type, listener, options);
+    return function () {
+      return window.removeEventListener(type, listener, options);
+    };
+  }, [type, listener]);
+}
+var eventListerOptions = {
+  passive: true
+};
+function useViewportSize() {
+  var _useState = React2.useState({
+      width: 0,
+      height: 0
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    windowSize = _useState2[0],
+    setWindowSize = _useState2[1];
+  var setSize = React2.useCallback(function () {
+    setWindowSize({
+      width: window.innerWidth || 0,
+      height: window.innerHeight || 0
+    });
+  }, []);
+  useWindowEvent("resize", setSize, eventListerOptions);
+  useWindowEvent("orientationchange", setSize, eventListerOptions);
+  React2.useEffect(setSize, []);
+  return windowSize;
 }
 
 exports.Buttons = Buttons;
 exports.FlexView = FlexView;
 exports.Layout = Layout;
 exports.QuixRouterProvider = QuixRouterProvider;
+exports.useViewPortSize = useViewportSize;

@@ -4,4 +4,4 @@ declare function useViewportSize(): {
     width: number;
     height: number;
 };
-export { useViewportSize };
+export default useViewportSize;

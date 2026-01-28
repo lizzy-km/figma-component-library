@@ -33,4 +33,4 @@ function useViewportSize() {
   return windowSize;
 }
 
-export { useViewportSize };
+export default  useViewportSize 

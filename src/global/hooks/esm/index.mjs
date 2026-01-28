@@ -79,4 +79,3 @@ export { useFileDialog } from './use-file-dialog/use-file-dialog.mjs';
 export { useLongPress } from './use-long-press/use-long-press.mjs';
 export { useSelection } from './use-selection/use-selection.mjs';
 export { getHotkeyHandler } from './use-hotkeys/parse-hotkey.mjs';
-//# sourceMappingURL=index.mjs.map

@@ -44,7 +44,7 @@ export default function FlexView(props: ViewProps) {
                 }
             </div>
         }
-        {/* {props.children} */}
+        {props.children}
 
        
 
