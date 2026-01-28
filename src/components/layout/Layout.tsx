@@ -228,7 +228,7 @@ export default function Layout(props: LayoutProps) {
                 height: Number(size.height) - (Number(header?.height) + 70),
                 margin: 5,
                 zIndex: 10,
-                width: ((size.width) - ((size.width < 450 ? Number(0) : size.width < 850 ? Number(sideMenu?.width?.tablet ?? 60) : size.width > 850 ? Number(sideMenu?.width?.desktop ?? 300) : Number(sideMenu?.width?.desktop ?? 300))))+30
+                width: (size.width) - (size.width < 450 ? Number(0) : size.width < 850 ? Number(sideMenu?.width?.tablet ?? 60) : size.width > 850 ? Number(sideMenu?.width?.desktop ?? 300) : Number(sideMenu?.width?.desktop ?? 300))+30
 
             }} >
 

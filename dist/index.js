@@ -2253,22 +2253,3 @@ function QuixRouterProvider(_ref) {
 }
 
 export { Buttons, FlexView, Layout, QuixRouterProvider };
-ze.width > 850 ? Number((_sideMenu$width$deskt = sideMenu === null || sideMenu === void 0 || (_sideMenu$width2 = sideMenu.width) === null || _sideMenu$width2 === void 0 ? void 0 : _sideMenu$width2.desktop) !== null && _sideMenu$width$deskt !== void 0 ? _sideMenu$width$deskt : 300) : Number((_sideMenu$width$deskt2 = sideMenu === null || sideMenu === void 0 || (_sideMenu$width3 = sideMenu.width) === null || _sideMenu$width3 === void 0 ? void 0 : _sideMenu$width3.desktop) !== null && _sideMenu$width$deskt2 !== void 0 ? _sideMenu$width$deskt2 : 300)) + 30
-      },
-      children: jsxRuntime.jsx(reactRouterDom.Outlet, {})
-    })]
-  });
-}
-
-function QuixRouterProvider(_ref) {
-  var routes = _ref.routes;
-  var router = reactRouterDom.createBrowserRouter(routes);
-  return jsxRuntime.jsx(reactRouterDom.RouterProvider, {
-    router: router
-  });
-}
-
-exports.Buttons = Buttons;
-exports.FlexView = FlexView;
-exports.Layout = Layout;
-exports.QuixRouterProvider = QuixRouterProvider;
