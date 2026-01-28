@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { LayoutProps, menuItemsDynamicStyleProps, menuItemsProps, sideMenuProps } from "./types";
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom"
 import './layout.style.css'
 import { JSX } from "react";
 import { styled } from "storybook/theming";
@@ -9,13 +9,13 @@ import { useViewportSize } from "./hooks/useElementSize";
 export default function Layout(props: LayoutProps) {
 
 
-    const { backgroundColor, layoutStyle, className, sideMenu, content, header
+    const { backgroundColor, layoutStyle, className, sideMenu, header
 
     } = props
 
     const size = useViewportSize();
 
-   
+
 
     const LayoutSection = styled.section`
     width:${layoutStyle?.width}
@@ -23,6 +23,9 @@ export default function Layout(props: LayoutProps) {
     const Content = styled.section`
 
     `
+
+    const navigate = useNavigate()
+
 
     function SideMenu(props: {
         sideMenu: sideMenuProps, top: number
@@ -119,9 +122,6 @@ export default function Layout(props: LayoutProps) {
     `
 
 
-        const navigate = (route: string) => {
-            window.location.replace(route)
-        }
         const Element = ({ children }: { children?: any }) =>
             ElementType === 'NavLink' ?
                 <NavLink key={item.label} style={{
@@ -203,7 +203,6 @@ export default function Layout(props: LayoutProps) {
 
 
 
-    // console.log( (size.width) - ((size.width < 450 ? Number(sideMenu?.width.mobile) : size.width < 850 ? Number(sideMenu?.width.tablet) : size.width > 850 ? Number(sideMenu?.width.desktop) : Number(sideMenu?.width.desktop)) + 30))
 
     return (
         <LayoutSection className={`${className}`} style={{
@@ -234,7 +233,7 @@ export default function Layout(props: LayoutProps) {
                 width: (size.width) - ((size.width < 450 ? Number(0) : size.width < 850 ? Number(sideMenu?.width?.tablet ?? 60) : size.width > 850 ? Number(sideMenu?.width?.desktop ?? 300) : Number(sideMenu?.width?.desktop ?? 300)) + 30),
 
             }} >
-                {content && content()}
+                <Outlet/>
             </Content>
         </LayoutSection>
     )
