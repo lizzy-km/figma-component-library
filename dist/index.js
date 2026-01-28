@@ -2100,7 +2100,7 @@ function Layout(props) {
     header = props.header;
   var size = useViewportSize();
   var LayoutSection = styled.section(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width:", "\n    "])), layoutStyle === null || layoutStyle === void 0 ? void 0 : layoutStyle.width);
-  var Content = styled.section(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n\n    "])));
+  var Content = styled.section(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral([""])));
   var navigate = useNavigate();
   function SideMenu(props) {
     var _sideMenuStyle$left, _menuItemStyle$width$, _menuItemStyle$width, _sideMenuStyle$bottom, _props$top, _menuItemStyle$width2;
@@ -2237,7 +2237,7 @@ function Layout(props) {
         height: Number(size.height) - (Number(header === null || header === void 0 ? void 0 : header.height) + 70),
         margin: 5,
         zIndex: 10,
-        width: size.width - ((size.width < 450 ? Number(0) : size.width < 850 ? Number((_sideMenu$width$table = sideMenu === null || sideMenu === void 0 || (_sideMenu$width = sideMenu.width) === null || _sideMenu$width === void 0 ? void 0 : _sideMenu$width.tablet) !== null && _sideMenu$width$table !== void 0 ? _sideMenu$width$table : 60) : size.width > 850 ? Number((_sideMenu$width$deskt = sideMenu === null || sideMenu === void 0 || (_sideMenu$width2 = sideMenu.width) === null || _sideMenu$width2 === void 0 ? void 0 : _sideMenu$width2.desktop) !== null && _sideMenu$width$deskt !== void 0 ? _sideMenu$width$deskt : 300) : Number((_sideMenu$width$deskt2 = sideMenu === null || sideMenu === void 0 || (_sideMenu$width3 = sideMenu.width) === null || _sideMenu$width3 === void 0 ? void 0 : _sideMenu$width3.desktop) !== null && _sideMenu$width$deskt2 !== void 0 ? _sideMenu$width$deskt2 : 300)) + 30)
+        width: size.width - (size.width < 450 ? Number(0) : size.width < 850 ? Number((_sideMenu$width$table = sideMenu === null || sideMenu === void 0 || (_sideMenu$width = sideMenu.width) === null || _sideMenu$width === void 0 ? void 0 : _sideMenu$width.tablet) !== null && _sideMenu$width$table !== void 0 ? _sideMenu$width$table : 60) : size.width > 850 ? Number((_sideMenu$width$deskt = sideMenu === null || sideMenu === void 0 || (_sideMenu$width2 = sideMenu.width) === null || _sideMenu$width2 === void 0 ? void 0 : _sideMenu$width2.desktop) !== null && _sideMenu$width$deskt !== void 0 ? _sideMenu$width$deskt : 300) : Number((_sideMenu$width$deskt2 = sideMenu === null || sideMenu === void 0 || (_sideMenu$width3 = sideMenu.width) === null || _sideMenu$width3 === void 0 ? void 0 : _sideMenu$width3.desktop) !== null && _sideMenu$width$deskt2 !== void 0 ? _sideMenu$width$deskt2 : 300)) + 30
       },
       children: jsx$1(Outlet, {})
     })]
@@ -2253,7 +2253,7 @@ function QuixRouterProvider(_ref) {
 }
 
 export { Buttons, FlexView, Layout, QuixRouterProvider };
-e.width > 850 ? Number((_sideMenu$width$deskt = sideMenu === null || sideMenu === void 0 || (_sideMenu$width2 = sideMenu.width) === null || _sideMenu$width2 === void 0 ? void 0 : _sideMenu$width2.desktop) !== null && _sideMenu$width$deskt !== void 0 ? _sideMenu$width$deskt : 300) : Number((_sideMenu$width$deskt2 = sideMenu === null || sideMenu === void 0 || (_sideMenu$width3 = sideMenu.width) === null || _sideMenu$width3 === void 0 ? void 0 : _sideMenu$width3.desktop) !== null && _sideMenu$width$deskt2 !== void 0 ? _sideMenu$width$deskt2 : 300)) + 30)
+ze.width > 850 ? Number((_sideMenu$width$deskt = sideMenu === null || sideMenu === void 0 || (_sideMenu$width2 = sideMenu.width) === null || _sideMenu$width2 === void 0 ? void 0 : _sideMenu$width2.desktop) !== null && _sideMenu$width$deskt !== void 0 ? _sideMenu$width$deskt : 300) : Number((_sideMenu$width$deskt2 = sideMenu === null || sideMenu === void 0 || (_sideMenu$width3 = sideMenu.width) === null || _sideMenu$width3 === void 0 ? void 0 : _sideMenu$width3.desktop) !== null && _sideMenu$width$deskt2 !== void 0 ? _sideMenu$width$deskt2 : 300)) + 30
       },
       children: jsxRuntime.jsx(reactRouterDom.Outlet, {})
     })]

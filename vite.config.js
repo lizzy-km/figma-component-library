@@ -11,12 +11,5 @@ export default defineConfig({
       include: [/node_modules/],
       transformMixedEsModules: true,
     },
-  },
-   rollupOptions: {
-      external: [
-        "react",
-        "react-dom",
-        "@mantine/hooks",
-      ],
-    },
+  }
 });
